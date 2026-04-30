@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panentheos — God in All and All in God</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --soil:#3B2F2A;--soil2:#2A1F1B;--soil3:#4a3830;--soil4:#5a4035;
+  --clay:#A06A4A;--sand:#D6C2A1;--sage:#7A7B58;--sage2:#5C5D40;
+  --stone:#B3A79A;--parch:#F3EBDD;--parch2:#E8DBC8;
+  --black:#171413;--gold:#C6A15B;--gold2:#A8833D;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--soil);color:var(--parch);overflow-x:hidden}
+h1,h2,h3{font-weight:300;letter-spacing:-.015em}
+a{color:inherit;text-decoration:none}
+
+.ey{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.8}
+.rule{width:36px;height:1px;background:var(--gold);opacity:.32;margin:14px 0 26px}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.up{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+.btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:13px 26px;display:inline-block;transition:all .2s;cursor:pointer;border:none}
+.btn-gold{color:var(--black);background:var(--gold)}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-outline-parch{color:var(--parch);border:.5px solid rgba(243,235,221,.22);background:transparent}
+.btn-outline-parch:hover{border-color:rgba(198,161,91,.5)}
+.btn-outline-dark{color:var(--soil);border:.5px solid rgba(59,47,42,.25);background:transparent}
+.btn-outline-dark:hover{border-color:rgba(160,106,74,.5)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 52px;background:rgba(42,31,27,.95);backdrop-filter:blur(14px);border-bottom:.5px solid rgba(198,161,91,.1);transition:padding .3s}
+nav.scrolled{padding:12px 52px}
+.nav-logo{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.nav-logo em{font-style:normal;color:var(--stone);opacity:.5}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .25s}
+.nav-links a:hover{color:var(--parch)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-book{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:9px 18px;transition:background .2s}
+.nav-book:hover{background:var(--gold2)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}.hbg span{display:block;width:22px;height:1px;background:var(--stone)}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--soil);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:30px}
+.mob-menu.open{display:flex}
+.mob-menu a{font-size:36px;font-weight:300;color:var(--parch)}
+.mob-x{position:absolute;top:20px;right:52px;font-family:'Space Mono',monospace;font-size:11px;color:var(--stone);cursor:pointer}
+
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--soil)}
+.hero-atm{position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 76% 34%,rgba(42,31,27,.9) 0%,transparent 65%),radial-gradient(ellipse 45% 55% at 15% 78%,rgba(122,123,88,.16) 0%,transparent 60%)}
+.hero-atm::after{content:'';position:absolute;inset:0;opacity:.28;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E")}
+.hero-wm{position:absolute;right:-40px;top:50%;transform:translateY(-54%);font-size:clamp(140px,24vw,360px);font-weight:300;font-style:italic;color:var(--soil2);opacity:.2;line-height:1;user-select:none;pointer-events:none;letter-spacing:-.04em}
+.hero-inner{position:relative;z-index:2;max-width:760px;padding:0 52px}
+.hero-kicker{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.78;margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.hero-kicker::before{content:'';display:block;width:24px;height:1px;background:var(--gold);opacity:.5}
+.hero-h1{font-size:clamp(52px,8vw,96px);font-weight:300;line-height:.97;color:var(--parch);margin-bottom:28px;letter-spacing:-.025em}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-body{font-size:20px;font-weight:300;line-height:1.72;color:var(--stone);max-width:560px;margin-bottom:36px}
+.hero-body strong{font-weight:400;color:var(--sand)}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+#overview{background:var(--parch);padding:96px 52px}
+.over-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:56px}
+.over-h{font-size:clamp(36px,5.5vw,66px);font-weight:300;color:var(--soil);line-height:1;letter-spacing:-.025em}
+.over-h em{font-style:italic;color:var(--clay)}
+.over-b{font-size:17px;font-weight:300;color:var(--sage2);line-height:1.75}
+.lanes-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.lane{background:var(--soil);padding:42px 36px;position:relative;overflow:hidden;display:block;transition:background .3s}
+.lane::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .38s cubic-bezier(.16,1,.3,1)}
+.lane:hover{background:#2f2420}.lane:hover::after{transform:scaleX(1)}
+.ln{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--gold);opacity:.42;margin-bottom:24px}
+.lt{font-size:28px;font-weight:300;color:var(--parch);margin-bottom:10px;letter-spacing:-.015em}
+.lb{font-size:15px;font-weight:300;color:var(--stone);line-height:1.65;margin-bottom:20px}
+.lc{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.6}
+
+#about-practice,#school,#about-jahn{padding:96px 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+#about-practice,#about-jahn{background:var(--soil)}
+#school{background:var(--parch2)}
+.sec-h{font-size:clamp(38px,6vw,70px);font-weight:300;line-height:.96;letter-spacing:-.025em;margin-bottom:24px}
+.sec-h.light{color:var(--parch)}
+.sec-h.dark{color:var(--soil)}
+.sec-h em{font-style:italic;color:var(--gold)}
+.sec-h.dark em{color:var(--clay)}
+.sec-p{font-size:17px;font-weight:300;line-height:1.78;margin-bottom:18px}
+.sec-p.light{color:var(--stone)}
+.sec-p.dark{color:var(--sage2)}
+.list{list-style:none}.list li{padding:18px 0;border-bottom:.5px solid rgba(179,167,154,.12);font-size:15px;line-height:1.6}
+.list.light li{color:var(--stone);border-color:rgba(179,167,154,.12)}
+.list.dark li{color:var(--sage2);border-color:rgba(59,47,42,.12)}
+.list strong{color:inherit;font-weight:400}
+
+#stream{background:var(--sage);padding:84px 52px;display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center}
+.stream-h{font-size:clamp(32px,4.5vw,54px);font-weight:300;color:var(--parch);line-height:1.04;letter-spacing:-.02em;margin-bottom:20px}
+.stream-b{font-size:17px;font-weight:300;color:rgba(243,235,221,.72);line-height:1.75;margin-bottom:22px}
+.stream-card{background:rgba(23,20,19,.22);border:.5px solid rgba(243,235,221,.12);padding:28px}
+.stream-card ul{list-style:none}.stream-card li{padding:10px 0;border-bottom:.5px solid rgba(243,235,221,.08);font-size:15px;color:rgba(243,235,221,.72)}
+.stream-card li:last-child{border-bottom:none}
+
+#sessions{background:var(--parch);padding:96px 52px}
+.services{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:40px}
+.svc{background:var(--soil);padding:28px;transition:background .25s}.svc:hover{background:#2f2420}
+.svc-name{font-size:20px;font-weight:300;color:var(--parch);margin-bottom:8px}.svc-desc{font-size:14px;color:var(--stone);line-height:1.6;margin-bottom:18px}.svc-cta{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:.65}
+
+#join{background:var(--soil2);padding:96px 52px}
+.join-hd{text-align:center;max-width:680px;margin:0 auto 52px}.join-h{font-size:clamp(30px,4vw,50px);font-weight:300;color:var(--parch);line-height:1.04;letter-spacing:-.02em;margin-bottom:14px}
+.join-b{font-size:17px;font-weight:300;color:var(--stone);line-height:1.7}
+.join-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.join-card{background:var(--soil3);padding:28px 24px;display:flex;flex-direction:column;min-height:210px}
+.join-card h3{font-size:22px;color:var(--parch);margin-bottom:10px}.join-card p{font-size:14px;color:var(--stone);line-height:1.6;flex:1}.join-card a{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-top:20px}
+
+footer{background:var(--soil2);padding:46px 52px 28px;border-top:.5px solid rgba(198,161,91,.1)}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px;margin-bottom:36px}.ft-bn{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.ft-copy{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--stone);opacity:.26}
+.ft-col h4{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--stone);opacity:.36;margin-bottom:14px;font-weight:400}
+.ft-col ul{list-style:none}.ft-col li{margin-bottom:8px}.ft-col a{font-size:14px;font-weight:300;color:var(--stone);opacity:.55}
+
+@media(max-width:960px){
+  nav{padding:15px 24px}.nav-links,.nav-book{display:none}.hbg{display:flex}.mob-x{right:24px}
+  #hero{padding-top:80px}.hero-inner{padding:0 24px}.hero-wm{font-size:clamp(120px,20vw,220px);right:-16px}
+  #overview,#sessions,#join{padding:60px 24px}
+  #about-practice,#school,#about-jahn,#stream{padding:60px 24px}
+  footer{padding:40px 24px 28px}
+  .over-grid,.lanes-grid,#about-practice,#school,#about-jahn,#stream,.services,.join-grid,.ft-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-x" onclick="closeMob()">Close ✕</span>
+  <a href="#overview" onclick="closeMob()">Overview</a>
+  <a href="#about-practice" onclick="closeMob()">About</a>
+  <a href="#stream" onclick="closeMob()">Daily Stream</a>
+  <a href="#school" onclick="closeMob()">School</a>
+  <a href="#sessions" onclick="closeMob()">Sessions</a>
+  <a href="#about-jahn" onclick="closeMob()">Jahn</a>
+  <a href="#join" onclick="closeMob()">Join</a>
+  <a href="https://illuminaticongo.org" onclick="closeMob()" target="_blank" rel="noopener">Illuminati Congo ↗</a>
+</div>
+
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">Panentheos <em>/ Jahn Hooks</em></a>
+  <ul class="nav-links">
+    <li><a href="#about-practice">About</a></li>
+    <li><a href="#stream">Daily Stream</a></li>
+    <li><a href="#school">School</a></li>
+    <li><a href="#sessions">Sessions</a></li>
+    <li><a href="#about-jahn">Jahn</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+  <a href="https://illuminaticongo.org" class="nav-book" target="_blank" rel="noopener">Illuminati Congo ↗</a>
+  <div class="hbg" onclick="openMob()"><span></span><span></span><span></span></div>
+</nav>
+
+<section id="hero">
+  <div class="hero-atm"></div>
+  <div class="hero-inner reveal up">
+    <p class="hero-kicker">God in All · All in God</p>
+    <h1 class="hero-h1">A place to return.<br><em>Breath, study, and practice</em><br>for a life with God in the world.</h1>
+    <p class="hero-body"><strong>Panentheos</strong> is a contemplative practice community and spiritual home for people seeking depth, rhythm, and transformation while living fully in the world.</p>
+    <div class="hero-ctas">
+      <a href="#join" class="btn btn-gold">Return to practice</a>
+      <a href="#about-practice" class="btn btn-outline-parch">About Panentheos</a>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="over-grid">
+    <div class="reveal up">
+      <p class="ey" style="color:var(--clay)">What Panentheos is</p>
+      <div class="rule" style="background:var(--clay)"></div>
+      <h2 class="over-h">A spiritual home,<br>not a <em>platform.</em></h2>
+    </div>
+    <p class="over-b reveal up d1">Panentheos holds Rebirthing breathwork, regular live streams, spiritual teaching, video content, the School, and direct work with Jahn — not as disconnected offerings, but as rooms within one living house of practice. It is the contemplative practice lane within the Illuminati Congo ecosystem.</p>
+  </div>
+  <div class="lanes-grid">
+    <a href="#stream" class="lane reveal up"><div class="ln">Where to begin</div><div class="lt">If you need rhythm</div><p class="lb">Return to live practice, reflection, teaching, and spiritual companionship through regular live streams and video teachings.</p><div class="lc">Return to the rhythm</div></a>
+    <a href="#school" class="lane reveal up d1"><div class="ln">Where to begin</div><div class="lt">If you need structure</div><p class="lb">Enter the School for guided study, archives, contemplative formation, and a deeper container for practice.</p><div class="lc">Enter the school</div></a>
+    <a href="#sessions" class="lane reveal up d2"><div class="ln">Where to begin</div><div class="lt">If you need direct support</div><p class="lb">Work directly with Jahn through private breathwork, consultation, or group practice.</p><div class="lc">Work directly with Jahn</div></a>
+    <a href="#about-practice" class="lane reveal up d3"><div class="ln">Not sure?</div><div class="lt">Start here</div><p class="lb">Learn the roots, meaning, and spirit of Panentheos before choosing your doorway.</p><div class="lc">Read the foundation</div></a>
+  </div>
+</section>
+
+<section id="about-practice">
+  <div class="reveal up">
+    <p class="ey">About the Practice</p>
+    <div class="rule"></div>
+    <h2 class="sec-h light">God in All<br>and All in <em>God.</em></h2>
+    <p class="sec-p light">Panentheos is a contemplative practice community and home monastic support system for people seeking a deeper spiritual life while living fully in the world. It supports remembrance through breath, attention, study, discipline, and shared spiritual rhythm.</p>
+    <p class="sec-p light">It is for people who want a real contemplative life, but are not leaving the world behind to find one.</p>
+  </div>
+  <div class="reveal up d1">
+    <ul class="list light">
+      <li><strong>Home monastic support system</strong><br>Not monastery cosplay, but real support for devotion, discipline, awareness, and return inside ordinary life.</li>
+      <li><strong>Rebirthing breathwork</strong><br>Breath can open perception, release emotional material, deepen awareness, and restore contact with what is sacred and real — without substance framing or false credential claims.</li>
+      <li><strong>Regular live streams and teachings</strong><br>Not pressure for daily output, but a steady recurring rhythm of practice, teaching, video content, and return.</li>
+      <li><strong>Living roots</strong><br>Grounded in Rebirthing Breathwork, Kundalini Yoga, and Kemetic Yoga as living lineages, not decorative references.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="stream">
+  <div class="reveal up">
+    <p class="ey" style="color:var(--parch)">The Rhythm</p>
+    <h2 class="stream-h">A recurring place<br>to return.</h2>
+    <p class="stream-b">Panentheos offers a living rhythm of practice, reflection, and spiritual companionship through regular live streams and video teachings. Not performance. Not content for content’s sake. A shared spiritual rhythm for people trying to live awake.</p>
+    <p class="stream-b"><strong>Schedule shared with members upon joining.</strong> First cohort details are being gathered now — join the list below for early access.</p>
+    <a href="#waitlist" class="btn btn-gold">Join the waitlist</a>
+  </div>
+  <div class="stream-card reveal up d1">
+    <ul>
+      <li>guided breath practice</li>
+      <li>contemplative reflection</li>
+      <li>spiritual teaching</li>
+      <li>scripture, symbolism, and mystical insight</li>
+      <li>real-time encouragement and orientation</li>
+      <li>support for an ongoing spiritual rhythm</li>
+    </ul>
+  </div>
+</section>
+
+<section id="school">
+  <div class="reveal up">
+    <p class="ey" style="color:var(--clay)">School / Membership</p>
+    <div class="rule" style="background:var(--clay)"></div>
+    <h2 class="sec-h dark">A living school<br>for <em>ordinary life.</em></h2>
+    <p class="sec-p dark">The Panentheos School is the membership and study arm of the wider practice ecosystem. It is for people who want more than occasional inspiration. It is for people who want rhythm, guidance, structure, and ongoing formation.</p>
+    <p class="sec-p dark">This is not only a content library. It is a place to study, practice, return, and deepen over time.</p>
+  </div>
+  <div class="reveal up d1">
+    <ul class="list dark">
+      <li><strong>What the school offers</strong><br>Live stream access, guided breathwork, archived teachings, structured study paths, reflections on spiritual life and discipline, and live gatherings.</li>
+      <li><strong>Why join</strong><br>Most people do not need more scattered spiritual information. They need a container.</li>
+      <li><strong>Who it serves</strong><br>People who want a home monastic rhythm without leaving the world, and a deeper structure of support for living a contemplative life.</li>
+    </ul>
+    <div style="margin-top:28px"><a href="#join" class="btn btn-outline-dark">Enter the school</a></div>
+  </div>
+</section>
+
+<section id="sessions">
+  <div class="reveal up">
+    <p class="ey" style="color:var(--clay)">Sessions</p>
+    <div class="rule" style="background:var(--clay)"></div>
+    <h2 class="over-h">Direct work<br>with <em>Jahn</em></h2>
+    <p class="over-b">Panentheos offers direct work through private sessions, consultation calls, and group breathwork experiences. These are for people seeking clarity, release, grounding, transformation, and a more direct relationship with breath, awareness, and spiritual life.</p>
+  </div>
+  <div class="services">
+    <div class="svc reveal up"><div class="svc-name">Private Practice</div><div class="svc-desc">Direct one-on-one breathwork and contemplative support for emotional release, nervous system regulation, spiritual opening, and deeper grounding.</div><div class="svc-cta">Work directly with Jahn</div></div>
+    <div class="svc reveal up d1"><div class="svc-name">Orientation Call</div><div class="svc-desc">A simple place to begin. Ask questions, explore fit, and clarify what kind of support or practice is right for you.</div><div class="svc-cta">Begin with conversation</div></div>
+    <div class="svc reveal up d2"><div class="svc-name">Shared Practice</div><div class="svc-desc">Guided group breathwork, contemplative classes, community practice gatherings, and special workshops or events.</div><div class="svc-cta">Inquire about group work</div></div>
+  </div>
+</section>
+
+<section id="about-jahn">
+  <div class="reveal up">
+    <p class="ey">About Jahn</p>
+    <div class="rule"></div>
+    <h2 class="sec-h light">Breathwork guide.<br>Artist. Teacher.<br><em>Still going.</em></h2>
+    <p class="sec-p light">Jahn Hooks, known musically as <a href="https://illuminaticongo.org" target="_blank" rel="noopener" style="color:var(--gold)">Illuminati Congo</a>, is a breathwork guide, artist, writer, and spiritual teacher based in Chicago. Through Panentheos, he offers a living path of contemplative practice rooted in breath, study, discipline, and direct experience.</p>
+    <p class="sec-p light">Panentheos grows out of decades of lived work, not theory alone.</p>
+  </div>
+  <div class="reveal up d1">
+    <ul class="list light">
+      <li><strong>Rebirthing Breathwork</strong><br>Trained with Leonard Orr, founder of Rebirthing Breathwork, in the Sierra Nevada mountains in 2005. Ongoing study since. Primary breathwork lineage of the Panentheos practice.</li>
+      <li><strong>Kundalini Yoga</strong><br>Teacher Training with Spirit Rising Yoga, 2005–2006.</li>
+      <li><strong>Kemetic Yoga</strong><br>Training with Yirser Ra Hotep beginning in 1995. Formal teacher training completed in 2014.</li>
+      <li><strong>Contemplative Study</strong><br>Years of personal study in Christian mysticism, Gnostic traditions, Rastafarian theology, and Kemetic philosophy — drawn from practice, reading, and direct transmission.</li>
+      <li><strong>Music & Performance</strong><br>20+ years as Illuminati Congo — improvisation, presence, and sound as contemplative discipline.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="join">
+  <div class="join-hd reveal up">
+    <p class="ey">Begin here</p>
+    <h2 class="join-h">Enter the practice</h2>
+    <p class="join-b">There are several ways to begin with Panentheos. Choose the doorway that fits where you are.</p>
+  </div>
+  <div class="join-grid">
+    <div class="join-card reveal up"><h3>Return to the Rhythm</h3><p>For people who want a recurring rhythm of practice, reflection, and spiritual companionship.</p><a href="#stream">Return to practice</a></div>
+    <div class="join-card reveal up d1"><h3>Enter the School</h3><p>For people who want a deeper structure of study, archives, guided practice, and ongoing formation.</p><a href="#school">Enter the school</a></div>
+    <div class="join-card reveal up d2"><h3>Work directly with Jahn</h3><p>For people who want direct support through private breathwork, conversation, or group practice.</p><a href="#sessions">Begin with Jahn</a></div>
+    <div class="join-card reveal up d3"><h3>Not sure where to begin?</h3><p>Send a message and share a little about what you are looking for. We can find the right doorway from there.</p><a href="mailto:illuminaticongo@gmail.com">Start with an inquiry</a></div>
+  </div>
+</section>
+
+
+<section id="waitlist" style="background:var(--parch);padding:96px 52px;color:var(--soil)">
+  <div style="max-width:760px;margin:0 auto;text-align:center" class="reveal up">
+    <p class="ey" style="color:var(--clay)">New here?</p>
+    <h2 class="over-h">Start with a free practice.</h2>
+    <p class="over-b" style="margin:18px auto 28px;max-width:620px">Get a free intro to the Panentheos breathwork — a simple session you can do now, wherever you are. Join the list for Daily Stream and Sacred School launch updates.</p>
+    <form name="panentheos-waitlist" method="POST" data-netlify="true" netlify style="display:grid;gap:10px;max-width:520px;margin:0 auto">
+      <input type="hidden" name="form-name" value="panentheos-waitlist">
+      <input name="name" placeholder="Your name" style="padding:14px 16px;border:1px solid rgba(59,47,42,.2);font:16px Georgia,serif;background:white;color:#2A1F1B">
+      <input name="email" type="email" placeholder="your@email.com" required style="padding:14px 16px;border:1px solid rgba(59,47,42,.2);font:16px Georgia,serif;background:white;color:#2A1F1B">
+      <button class="btn btn-gold" type="submit">Get the free intro →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-bn">Panentheos</div>
+      <p style="font-size:14px;font-weight:300;color:var(--stone);line-height:1.7;opacity:.6;max-width:360px">A contemplative practice community and home monastic support system for people seeking a deeper spiritual life in the world. Panentheos is part of the <a href="https://illuminaticongo.org" target="_blank" rel="noopener" style="color:var(--gold)">Illuminati Congo</a> ecosystem.</p>
+    </div>
+    <div class="ft-col"><h4>Practice</h4><ul><li><a href="#about-practice">About</a></li><li><a href="#stream">Daily Stream</a></li><li><a href="#school">School</a></li></ul></div>
+    <div class="ft-col"><h4>Work with Jahn</h4><ul><li><a href="#sessions">Sessions</a></li><li><a href="#about-jahn">About Jahn</a></li><li><a href="https://illuminaticongo.org" target="_blank" rel="noopener">Illuminati Congo ↗</a></li><li><a href="https://instagram.com/illuminaticongo" target="_blank" rel="noopener">Instagram</a></li><li><a href="mailto:illuminaticongo@gmail.com">Contact</a></li></ul></div>
+  </div>
+  <div class="ft-copy">© 2025 Panentheos · God in All and All in God · part of Illuminati Congo</div>
+</footer>
+
+<script>
+function openMob(){document.getElementById('mobMenu').classList.add('open')}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open')}
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>20)})
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('up')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
